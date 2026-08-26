@@ -1,43 +1,40 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: hdfc-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
+  name: hdfc-ingress
 spec:
-  ingressClassName: nginx
-  rules:
-    - http:
-        paths:
-          - path: /(internetbanking(?:/.*)?)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: hdfc-service
-                port:
-                  number: 80
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /internetbanking
+            pathType: Prefix
+            backend:
+              service:
+                name: hdfc-service
+                port:
+                  number: 80
 
-          - path: /(insurance(?:/.*)?)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: hdfc-service
-                port:
-                  number: 80
+          - path: /insurance
+            pathType: Prefix
+            backend:
+              service:
+                name: hdfc-service
+                port:
+                  number: 80
 
-          - path: /(loans(?:/.*)?)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: hdfc-service
-                port:
-                  number: 80
+          - path: /loans
+            pathType: Prefix
+            backend:
+              service:
+                name: hdfc-service
+                port:
+                  number: 80
 
-          - path: /(mobilebanking(?:/.*)?)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: hdfc-service
-                port:
-                  number: 80
+          - path: /mobilebanking
+            pathType: Prefix
+            backend:
+              service:
+                name: hdfc-service
+                port:
+                  number: 80
